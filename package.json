@@ -1,7 +1,7 @@
 {
   "name": "melogersurbordeaux",
   "version": "1.0.0",
-  "description": "Pour m'aider dans ma recherche d'appart.",
+  "description": "Personal project for monitoring my housing search.",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
@@ -28,5 +28,8 @@
     "@types/express": "^4.17.13",
     "@types/mongodb": "^3.6.20",
     "nodemon": "^2.0.12"
+  },
+  "engines": {
+    "node": "12.14.1"
   }
 }
