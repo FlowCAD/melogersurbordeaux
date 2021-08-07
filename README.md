@@ -19,9 +19,3 @@ Déploiement de la MEAN Stack sur Heroku.
 ### Deployment Notes
 * npm ci
 * `nodemon server.js` | `npm run start:dev`
-
-### TODO
-* [ ] Authentification
-* [ ] Formulaire front
-* [ ] Géolocalisation
-* [ ] Isochrones
