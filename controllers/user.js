@@ -16,5 +16,27 @@ const register = (req, res) => {
   );
 };
 
+// POST '/login'
+const login = (req, res) => {
+  let userData = req.body;
+
+  User.findOne({name: userData.name})
+    .then(user => {
+      if (!user || user.password !== userData.password) {
+        res.sendStatus(401);
+      } else {
+        res.json(user);
+      }
+    })
+    .catch(err => {
+      console.error(err);
+      res.json({Error: err});
+    });
+};
+
+
 //export controller functions
-module.exports = { register };
+module.exports = {
+  register,
+  login
+};
