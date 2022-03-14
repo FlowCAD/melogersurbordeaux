@@ -4,7 +4,8 @@ const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
 const compression = require('compression');
-const routes = require('./routes/appart');
+const appartRoutes = require('./routes/appart');
+const userRoutes = require('./routes/user');
 
 const app = express();
 const port = parseInt(process.env.PORT, 10) || 3000;
@@ -17,7 +18,6 @@ const mongooseOptions = {
   connectTimeoutMS: 30000
 };
 
-
 mongoose.connect(
   process.env.MONGODB_URI,
   mongooseOptions,
@@ -26,7 +26,6 @@ mongoose.connect(
     console.log("MongoDB Connection -- Ready state is:", mongoose.connection.readyState);
   }
 );
-
 
 /* MIDDLEWARE */
 app.use(helmet({
@@ -48,7 +47,7 @@ app.use(express.json());
 app.use('/uploads', express.static('./uploads'));
 /* END MIDDLEWARE */
 
-app.use('/', routes);
+app.use('/', appartRoutes, userRoutes);
 
 app.route('/').get((req, res) => {
   res.sendFile(process.cwd() + '/index.html');
