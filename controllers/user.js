@@ -1,3 +1,4 @@
+const jwt = require('jsonwebtoken');
 const { User } = require('../models');
 
 // POST '/register'
@@ -8,7 +9,11 @@ const register = (req, res) => {
   });
 
   newUser.save()
-    .then(data => res.json(data))
+    .then(data => {
+      let payload = { subject: data._id };
+      let token = jwt.sign(payload, 'myTmpSecretKey');
+      res.json({token});
+    })
     .catch(err => {
       console.error(err);
       res.json({Error: err});
@@ -25,7 +30,9 @@ const login = (req, res) => {
       if (!user || user.password !== userData.password) {
         res.sendStatus(401);
       } else {
-        res.json(user);
+        let payload = { subject: user._id };
+        let token = jwt.sign(payload, 'myTmpSecretKey');
+        res.json({token});
       }
     })
     .catch(err => {
