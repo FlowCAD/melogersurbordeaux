@@ -11,7 +11,7 @@ const register = (req, res) => {
   newUser.save()
     .then(data => {
       let payload = { subject: data._id };
-      let token = jwt.sign(payload, 'myTmpSecretKey');
+      let token = jwt.sign(payload, process.env.SECRET_KEY);
       res.json({token});
     })
     .catch(err => {
@@ -31,7 +31,7 @@ const login = (req, res) => {
         res.sendStatus(401);
       } else {
         let payload = { subject: user._id };
-        let token = jwt.sign(payload, 'myTmpSecretKey');
+        let token = jwt.sign(payload, process.env.SECRET_KEY);
         res.json({token});
       }
     })
