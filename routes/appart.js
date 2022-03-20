@@ -5,13 +5,13 @@ const appartController = require('../controllers/appart');
 const router  = express.Router();
 
 router.get('/appart', verifyToken, appartController.getAll);
-router.post('/appart', appartController.uploadImg, appartController.newItem);
-router.delete('/appart', appartController.deleteAll);
+router.post('/appart', verifyToken, appartController.uploadImg, appartController.newItem);
+router.delete('/appart', verifyToken, appartController.deleteAll);
 
-router.get('/appart/:name', appartController.getOne);
-router.patch('/appart/:name', appartController.updateOne);
-router.post('/appart/:name', appartController.uploadImg, appartController.addACommentOnItem);
-router.delete('/appart/:name', appartController.deleteOne);
+router.get('/appart/:name', verifyToken, appartController.getOne);
+router.patch('/appart/:name', verifyToken, appartController.updateOne);
+router.post('/appart/:name', verifyToken, appartController.uploadImg, appartController.addACommentOnItem);
+router.delete('/appart/:name', verifyToken, appartController.deleteOne);
 
 module.exports = router;
 
