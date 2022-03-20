@@ -3,6 +3,7 @@ const express = require("express");
 const mongoose = require('mongoose');
 const helmet = require('helmet');
 const cors = require('cors');
+const cryptoJS = require("crypto-js");
 const compression = require('compression');
 const appartRoutes = require('./routes/appart');
 const userRoutes = require('./routes/user');
@@ -43,14 +44,11 @@ app.use(compression());
 app.use(express.static("public"));
 app.use(express.json());
 app.use('/uploads', express.static('./uploads'));
+app.get('/get-map-key', (req, res) => res.json(cryptoJS.AES.encrypt(process.env.MAP_API_KEY, 'myGreatPass').toString()));
 /* END MIDDLEWARE */
 
 app.use('/', appartRoutes, userRoutes);
 
-app.route('/').get((req, res) => {
-  res.sendFile(process.cwd() + '/index.html');
-});
+app.route('/').get((req, res) => res.sendFile(process.cwd() + '/index.html'));
 
-app.listen(port, () => {
-  console.log(`Server is running on port ${port}`);
-});
+app.listen(port, () => console.log(`Server is running on port ${port}`));
