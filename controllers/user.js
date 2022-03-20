@@ -1,4 +1,6 @@
+require('dotenv').config();
 const jwt = require('jsonwebtoken');
+const cryptoJS = require("crypto-js");
 const { User } = require('../models');
 
 // POST '/register'
@@ -27,7 +29,9 @@ const login = (req, res) => {
 
   User.findOne({name: userData.name})
     .then(user => {
-      if (!user || user.password !== userData.password) {
+      let dbPsw = cryptoJS.AES.decrypt(user.password, process.env.SECRET_PASSWORD).toString(cryptoJS.enc.Utf8);
+      let userPsw = cryptoJS.AES.decrypt(userData.password, process.env.SECRET_PASSWORD).toString(cryptoJS.enc.Utf8);
+      if (!user || dbPsw !== userPsw) {
         res.sendStatus(401);
       } else {
         let payload = { subject: user._id };

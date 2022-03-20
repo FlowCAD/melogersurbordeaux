@@ -44,7 +44,7 @@ app.use(compression());
 app.use(express.static("public"));
 app.use(express.json());
 app.use('/uploads', express.static('./uploads'));
-app.get('/get-map-key', (req, res) => res.json(cryptoJS.AES.encrypt(process.env.MAP_API_KEY, 'myGreatPass').toString()));
+app.get('/get-map-key', (req, res) => res.json(cryptoJS.AES.encrypt(process.env.MAP_API_KEY, process.env.SECRET_PASSWORD).toString()));
 /* END MIDDLEWARE */
 
 app.use('/', appartRoutes, userRoutes);
