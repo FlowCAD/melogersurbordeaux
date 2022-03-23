@@ -59,9 +59,9 @@ const deleteAll = (req, res) => {
     .catch(() => res.json({Error: 'Complete delete failed'}) );
 };
 
-//GET '/appart/:name'
+//GET '/appart/:code'
 const getOne = (req, res) => {
-  Appart.findOne({name: req.params.name})
+  Appart.findOne({code: req.params.code})
     .then(data => {
       if (data) {
         res.json(data);
@@ -76,14 +76,14 @@ const getOne = (req, res) => {
   );
 };
 
-//PATCH '/appart/:name'
+//PATCH '/appart/:code'
 const updateOne = (req, res) => {
-  Appart.findOneAndUpdate({name: req.params.name}, {$set: req.body})
+  Appart.findOneAndUpdate({code: req.params.code}, {$set: req.body})
     .then(() => res.send({message: 'Updated successfully'}))
     .catch(err => res.send(err));
 };
 
-//POST '/appart/:name'
+//POST '/appart/:code'
 const addACommentOnItem = (req, res) => {
   const commentText = req.body.comment;
   const comment = {
@@ -91,7 +91,7 @@ const addACommentOnItem = (req, res) => {
     date: new Date()
   };
 
-  Appart.findOne({name: req.params.name})
+  Appart.findOne({code: req.params.code})
     .then(data => {
       if (data) {
         if (commentText) {
@@ -113,9 +113,9 @@ const addACommentOnItem = (req, res) => {
   );
 };
 
-//DELETE '/appart/:name'
+//DELETE '/appart/:code'
 const deleteOne = (req, res) => {
-  Appart.findOne({ name: req.params.name })
+  Appart.findOne({ code: req.params.code })
     .then(data => {
       if (data.image !== null) {
         fs.unlink(data.image, err => {
@@ -124,7 +124,7 @@ const deleteOne = (req, res) => {
             return;
           }
 
-          Appart.deleteOne({name: req.params.name})
+          Appart.deleteOne({code: req.params.code})
             .then(data => {
               if (data.n === 0) {
                 res.sendStatus(404);

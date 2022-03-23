@@ -8,10 +8,10 @@ router.get('/appart', verifyToken, appartController.getAll);
 router.post('/appart', verifyToken, appartController.uploadImg, appartController.newItem);
 router.delete('/appart', verifyToken, appartController.deleteAll);
 
-router.get('/appart/:name', verifyToken, appartController.getOne);
-router.patch('/appart/:name', verifyToken, appartController.updateOne);
-router.post('/appart/:name', verifyToken, appartController.uploadImg, appartController.addACommentOnItem);
-router.delete('/appart/:name', verifyToken, appartController.deleteOne);
+router.get('/appart/:code', verifyToken, appartController.getOne);
+router.patch('/appart/:code', verifyToken, appartController.updateOne);
+router.post('/appart/:code', verifyToken, appartController.uploadImg, appartController.addACommentOnItem);
+router.delete('/appart/:code', verifyToken, appartController.deleteOne);
 
 module.exports = router;
 
