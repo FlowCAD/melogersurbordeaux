@@ -17,10 +17,12 @@ const AppartSchema = new mongoose.Schema({
     }
   },
   name: {
-    type:String,
+    type: String,
     minlength: 1,
-    required:true
+    required: true
   },
+  price: { type: Number, required: true },
+  state: { type: String, required: true },
   description: String,
   image: String,
   comments: [{ text: String, date: {type:String, default: new Date()} }]

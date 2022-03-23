@@ -30,6 +30,8 @@ const getAll = (req, res) => {
 const newItem = (req, res) => {
   const newAppart = new Appart({
     name: req.body.name,
+    price: req.body.price,
+    state: req.body.state,
     description: req.body.description,
     image: req.file.path,
     comments: req.body.comments
