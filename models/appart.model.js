@@ -25,6 +25,8 @@ const AppartSchema = new mongoose.Schema({
   state: { type: String, required: true },
   description: String,
   image: String,
+  createdBy: { type: String, required: true },
+  createdAt: { type: String, default: new Date() },
   comments: [{
     text: String,
     author: String,

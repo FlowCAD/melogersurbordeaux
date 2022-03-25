@@ -33,7 +33,8 @@ const newItem = (req, res) => {
     price: req.body.price,
     state: req.body.state,
     description: req.body.description,
-    image: req.file.path,
+    image: req.file ? req.file.path : '',
+    createdBy: req.body.createdBy,
     comments: req.body.comments
   });
 
@@ -80,8 +81,8 @@ const getOne = (req, res) => {
 
 //PATCH '/appart/:code'
 const updateOne = (req, res) => {
-  Appart.findOneAndUpdate({code: req.params.code}, {$set: req.body})
-    .then(() => res.send({message: 'Updated successfully'}))
+  Appart.findOneAndUpdate({code: req.params.code}, {$set: req.body}, {new: true})
+    .then(doc => res.json(doc))
     .catch(err => res.send(err));
 };
 
