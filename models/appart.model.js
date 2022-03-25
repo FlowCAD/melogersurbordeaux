@@ -25,7 +25,11 @@ const AppartSchema = new mongoose.Schema({
   state: { type: String, required: true },
   description: String,
   image: String,
-  comments: [{ text: String, date: {type:String, default: new Date()} }]
+  comments: [{
+    text: String,
+    author: String,
+    date: {type:String, default: new Date()}
+  }]
 });
 
 const Appart = mongoose.model('Appart', AppartSchema);

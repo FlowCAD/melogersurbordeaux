@@ -87,16 +87,16 @@ const updateOne = (req, res) => {
 
 //POST '/appart/:code'
 const addACommentOnItem = (req, res) => {
-  const commentText = req.body.comment;
   const comment = {
-    text: commentText,
+    text: req.body.text,
+    author: req.body.author || 'admin',
     date: new Date()
   };
 
   Appart.findOne({code: req.params.code})
     .then(data => {
       if (data) {
-        if (commentText) {
+        if (comment.text) {
           data.comments.push(comment);
           data.save()
             .then(data => res.json(data))
