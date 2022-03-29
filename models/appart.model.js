@@ -44,6 +44,7 @@ const AppartSchema = new mongoose.Schema({
   parking: Boolean,
   bikeParking: Boolean,
   annualCondominiumFees: Number,
+  numberOfLots: Number,
   description: String,
   image: String,
   createdBy: { type: String, required: true },

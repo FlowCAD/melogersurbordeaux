@@ -53,6 +53,7 @@ const newItem = (req, res) => {
     parking: req.body.parking,
     bikeParking: req.body.bikeParking,
     annualCondominiumFees: req.body.annualCondominiumFees,
+    numberOfLots: req.body.numberOfLots,
     description: req.body.description,
     image: req.file ? req.file.path : '',
     createdBy: req.body.createdBy,
