@@ -51,4 +51,9 @@ app.use('/', appartRoutes, userRoutes);
 
 app.route('/').get((req, res) => res.sendFile(process.cwd() + '/index.html'));
 
+// Fallback on staticServe on routing issue
+const staticServe = express.static(`${ __dirname }/public`);
+app.use("/", staticServe);
+app.use("*", staticServe);
+
 app.listen(port, () => console.log(`Server is running on port ${port}`));
