@@ -1,6 +1,7 @@
 const mongoose = require("mongoose");
 
 const AppartSchema = new mongoose.Schema({
+  type: { type: String, required: true },
   code: {
     type:String,
     default: function() {

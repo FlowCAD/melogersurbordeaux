@@ -29,6 +29,7 @@ const getAll = (req, res) => {
 //POST '/appart'
 const newItem = (req, res) => {
   const newAppart = new Appart({
+    type: req.body.type,
     name: req.body.name,
     link: req.body.link,
     state: req.body.state,
