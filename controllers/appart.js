@@ -75,11 +75,14 @@ const deleteAll = (req, res) => {
   fs.readdir('uploads', (err, files) => {
     if (err) console.log(err);
     for (const file of files) {
-      fs.unlink(path.join('uploads', file), error => {
-        if (error) console.log(error);
-      });
+      fs.unlink(path.join('uploads', file), resultHandler);
     }
   });
+
+  var resultHandler = function(err) {
+    if (err) console.error("Unlink failed", err);
+  };
+
   Appart.deleteMany({})
     .then(() => res.json({message: 'Complete delete successful'}) )
     .catch(() => res.json({Error: 'Complete delete failed'}) );
@@ -143,28 +146,31 @@ const addACommentOnItem = (req, res) => {
 const deleteOne = (req, res) => {
   Appart.findOne({ code: req.params.code })
     .then(data => {
-      if (data.image !== null) {
-        fs.unlink(data.image, err => {
-          if (err) {
-            console.error(err);
-            return;
-          }
+      if (data) {
+        if (data.image !== null && data.image !== '') {
+          fs.unlink(data.image, resultHandler);
+        }
 
-          Appart.deleteOne({code: req.params.code})
-            .then(data => {
-              if (data.n === 0) {
-                res.sendStatus(404);
-              } else {
-                res.json({message: "Appart deleted."});
-              }
-            })
-            .catch(err => {
-              console.error(err);
-              res.json({Error: err});
-            });
-        });
+        Appart.deleteOne({code: req.params.code})
+          .then(data => {
+            if (data.n === 0) {
+              res.sendStatus(404);
+            } else {
+              res.json({message: "Appart deleted."});
+            }
+          })
+          .catch(err => {
+            console.error(err);
+            res.json({Error: err});
+          });
+      } else {
+        res.sendStatus(404);
       }
     });
+
+  var resultHandler = function(err) {
+    if (err) console.error("Unlink failed", err);
+  };
 };
 
 //export controller functions

@@ -49,7 +49,10 @@ const AppartSchema = new mongoose.Schema({
   description: String,
   image: String,
   createdBy: { type: String, required: true },
-  createdAt: { type: String, default: new Date() },
+  createdAt: {
+    type: String,
+    default: function() { return new Date(); }
+  },
   comments: [{
     text: String,
     author: String,
