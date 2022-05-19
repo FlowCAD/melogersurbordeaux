@@ -5,6 +5,7 @@ const districtController = require('../controllers/district');
 const router  = express.Router();
 
 router.get('/district', verifyToken, districtController.getAll);
+router.get('/district/:code', verifyToken, districtController.getOne);
 
 module.exports = router;
 

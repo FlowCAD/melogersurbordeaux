@@ -12,8 +12,22 @@ const getAll = (req, res) => {
   );
 };
 
+//GET '/district/:code'
+const getOne = (req, res) => {
+  District.findOne({code: req.params.code})
+    .then(data => {
+      if (data) res.json(data);
+      else res.sendStatus(404);
+    })
+    .catch(err => {
+      console.error(err);
+      res.json({Error: err});
+    }
+  );
+};
 
 //export controller functions
 module.exports = {
-  getAll
+  getAll,
+  getOne
 };
