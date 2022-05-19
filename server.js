@@ -6,6 +6,7 @@ const cors = require('cors');
 const cryptoJS = require("crypto-js");
 const compression = require('compression');
 const appartRoutes = require('./routes/appart');
+const districtRoutes = require('./routes/district');
 const userRoutes = require('./routes/user');
 
 const app = express();
@@ -47,7 +48,7 @@ app.use('/uploads', express.static('./uploads'));
 app.get('/get-map-key', (req, res) => res.json(cryptoJS.AES.encrypt(process.env.MAP_API_KEY, process.env.SECRET_PASSWORD).toString()));
 /* END MIDDLEWARE */
 
-app.use('/', appartRoutes, userRoutes);
+app.use('/', appartRoutes, districtRoutes, userRoutes);
 
 app.route('/').get((req, res) => res.sendFile(process.cwd() + '/index.html'));
 
