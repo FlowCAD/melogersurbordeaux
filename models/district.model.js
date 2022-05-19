@@ -9,7 +9,7 @@ const pricesObject = new mongoose.Schema({
 const DistrictSchema = new mongoose.Schema({
   code: { type: String, required: true },
   label: String,
-  prices: { type: Map, of: pricesObject }
+  prices: { type: Object, of: pricesObject }
 });
 
 const District = mongoose.model('District', DistrictSchema);

@@ -6,6 +6,8 @@ const router  = express.Router();
 
 router.get('/district', verifyToken, districtController.getAll);
 router.get('/district/:code', verifyToken, districtController.getOne);
+router.patch('/district/:code', verifyToken, districtController.updateOne);
+router.patch('/district', verifyToken, districtController.updateAll);
 
 module.exports = router;
 
