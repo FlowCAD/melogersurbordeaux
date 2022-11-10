@@ -55,7 +55,7 @@ const updateAll = (req, res) => {
         District.findOneAndUpdate({ code: obj.code }, { $set : { prices: obj.prices }}, next);
       }, err => {
         if (err) console.error(err)
-        else res.sendStatus(200);
+        else res.json({message: 'Batch update done'});
       });
     })
     .catch(err => res.send(err));
