@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const districtController = require('../controllers/district');
 
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/district', verifyToken, districtController.getAll);
 router.get('/district/:code', verifyToken, districtController.getOne);

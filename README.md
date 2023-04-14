@@ -33,14 +33,16 @@ Déploiement de la MEAN Stack sur Azure.
 * [app-service](https://learn.microsoft.com/fr-fr/azure/app-service/quickstart-custom-container?tabs=dotnet&pivots=container-linux-azure-portal)
 ##### Check CLI
 > az --version
+
 > az login
+
 > az acr login --name meloger
 
 #### Push to the Azure registry
-docker push meloger.azurecr.io/meloger
+> docker push meloger.azurecr.io/meloger
 
 #### Deleting the ISO
-docker rmi meloger.azurecr.io/meloger
+> docker rmi meloger.azurecr.io/meloger
 
 
 ### Gallery

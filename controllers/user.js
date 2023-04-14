@@ -7,27 +7,28 @@ const { User } = require('../models');
 const register = (req, res) => {
   const newUser = new User({
     name: req.body.name,
-    password: req.body.password
+    password: req.body.password,
+    role: "reader"
   });
 
   newUser.save()
     .then(data => {
       let payload = { subject: data._id };
       let token = jwt.sign(payload, process.env.SECRET_KEY);
-      res.json({token});
+      res.json({ token, name: data.name, role: data.role });
     })
     .catch(err => {
       console.error(err);
-      res.json({Error: err});
+      res.json({ Error: err });
     }
-  );
+    );
 };
 
 // POST '/login'
 const login = (req, res) => {
   let userData = req.body;
 
-  User.findOne({name: userData.name})
+  User.findOne({ name: userData.name })
     .then(user => {
       if (!user) {
         res.sendStatus(401);
@@ -39,13 +40,13 @@ const login = (req, res) => {
         } else {
           let payload = { subject: user._id };
           let token = jwt.sign(payload, process.env.SECRET_KEY);
-          res.json({token});
+          res.json({ token, name: user.name, role: user.role });
         }
       }
     })
     .catch(err => {
       console.error(err);
-      res.json({Error: err});
+      res.json({ Error: err });
     });
 };
 

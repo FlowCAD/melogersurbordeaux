@@ -2,7 +2,7 @@ const express = require('express');
 const jwt = require('jsonwebtoken');
 const appartController = require('../controllers/appart');
 
-const router  = express.Router();
+const router = express.Router();
 
 router.get('/appart', verifyToken, appartController.getAll);
 router.post('/appart', verifyToken, appartController.uploadImg, appartController.newItem);
