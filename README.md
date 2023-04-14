@@ -5,7 +5,7 @@ Projet personnel afin de m'aider dans ma recherche d'appart.
 Suivi, historisation, géolocalisation et analyse spatiale de l'offre immobilière sur Bordeaux.
 
 ### Objectif technique
-Déploiement de la MEAN Stack sur Heroku.
+Déploiement de la MEAN Stack sur Azure.
 
 ### Stack
 * Angular 12
@@ -13,15 +13,35 @@ Déploiement de la MEAN Stack sur Heroku.
 * Express
 * Mongoose
 * MongoDB Atlas
-* Heroku
+* Azure
 * Un ordinateur
 
 ### Deployment Notes
 * npm ci
 * `nodemon server.js` | `npm run start:dev`
 
-### Working with Docker
-> docker run -d -p 8080:3000 flowcad/melogersurbordeaux:be
+### Working with Docker and Azure
+#### Building the local docker image
+> docker build -t me-loger-app .
+#### Running it locally
+> docker run -d --name me-loger-container -p 3000:3000 me-loger-app
+#### Building an ISO image with <azure registry url>/<name>:<tag>
+> docker tag me-loger-app meloger.azurecr.io/meloger:latest
+#### Connecting to Azure via the CLI
+##### Following the documentations
+* [container-registry](https://learn.microsoft.com/fr-fr/azure/container-registry/container-registry-get-started-portal?tabs=azure-cli)
+* [app-service](https://learn.microsoft.com/fr-fr/azure/app-service/quickstart-custom-container?tabs=dotnet&pivots=container-linux-azure-portal)
+##### Check CLI
+> az --version
+> az login
+> az acr login --name meloger
+
+#### Push to the Azure registry
+docker push meloger.azurecr.io/meloger
+
+#### Deleting the ISO
+docker rmi meloger.azurecr.io/meloger
+
 
 ### Gallery
 ![Map](https://user-images.githubusercontent.com/15570932/231195956-13528610-c3b4-42cb-964d-4187e45e5424.png "Map")

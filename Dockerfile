@@ -1,4 +1,3 @@
-# Test web app that returns the name of the host/pod/container servicing req
 # Linux x64
 FROM node:12.14.1-alpine
 
