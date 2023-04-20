@@ -1,5 +1,5 @@
 # Linux x64
-FROM node:12.14.1-alpine
+FROM node:14.17.3-alpine
 
 LABEL org.opencontainers.image.title="Me Loger sur Bordeaux - Backend" \
       org.opencontainers.image.description="Backend part of the project Me Loger sur Bordeaux" \
@@ -16,6 +16,8 @@ WORKDIR /usr/src/app
 
 # Install dependencies from packages.json
 RUN npm install
+
+EXPOSE 3000
 
 # Command for container to execute
 ENTRYPOINT [ "node", "server.js" ]
